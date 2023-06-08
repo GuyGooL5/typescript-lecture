@@ -3,7 +3,19 @@ on:
   push:
     branches:
       - master
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
+
   deploy:
     environment:
       name: github-pages
@@ -17,19 +29,18 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16.x
-          cache: "npm"
+          cache: npm
       - name: Install dependencies
         run: npm install
       - name: Build
         run: npm run build
-      # 👆 Build steps
+      # 👇 Deploy steps
       - name: Setup Pages
         uses: actions/configure-pages@v1
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          # 👇 Specify build output path
-          path: build
+          path: build # The build folder
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v2
