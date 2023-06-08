@@ -5,7 +5,7 @@ const lightCodeTheme = require("prism-react-renderer/themes/github");
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 const organizationName = "GuyGooL5";
-const projectName = "typescript-lectures";
+const projectName = "typescript-lecture";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
