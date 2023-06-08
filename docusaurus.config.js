@@ -17,7 +17,6 @@ const config = {
   baseUrl: "/",
   organizationName: "guygool5",
   projectName: "typescript-from-zero-to-less-confused",
-
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
 
@@ -31,7 +30,9 @@ const config = {
       "classic",
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
+        blog: false,
         docs: {
+          routeBasePath: "/",
           sidebarPath: require.resolve("./sidebars.js"),
         },
         theme: {
@@ -40,7 +41,7 @@ const config = {
       }),
     ],
   ],
-
+  noIndex: true,
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
