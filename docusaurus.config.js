@@ -4,6 +4,9 @@
 const lightCodeTheme = require("prism-react-renderer/themes/github");
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
+const organizationName = "GuyGooL5";
+const projectName = "typescript-lectures";
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "TypeScript from Zero to Less Confused",
@@ -11,12 +14,12 @@ const config = {
   favicon: "img/favicon.ico",
 
   // Set the production url of your site here
-  url: "https://your-docusaurus-test-site.com",
+  url: `https://${organizationName}.github.io`,
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: "/",
-  organizationName: "guygool5",
-  projectName: "typescript-from-zero-to-less-confused",
+  baseUrl: `/${projectName}/`,
+  organizationName,
+  projectName,
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
 
@@ -34,6 +37,7 @@ const config = {
         docs: {
           routeBasePath: "/",
           sidebarPath: require.resolve("./sidebars.js"),
+          editUrl: `https://github.com/${organizationName}/${projectName}/tree/master/`,
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
