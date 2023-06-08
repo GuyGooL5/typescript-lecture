@@ -57,9 +57,8 @@ const config = {
             type: "docSidebar",
             sidebarId: "tutorialSidebar",
             position: "left",
-            label: "Tutorial",
+            label: "Presentations",
           },
-          { to: "/lectures", label: "Lectures", position: "left" },
           {
             href: "https://github.com/guygool5/typescript-from-zero-to-less-confused",
             label: "GitHub",
@@ -69,12 +68,6 @@ const config = {
       },
       footer: {
         style: "dark",
-        links: [
-          {
-            title: "Docs",
-            items: [{ label: "Tutorial", to: "/docs/intro" }],
-          },
-        ],
         copyright: `Copyright © ${new Date().getFullYear()} Guy Tsitsiashvili. Built with Docusaurus.`,
       },
       prism: {
