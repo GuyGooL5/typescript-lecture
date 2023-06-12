@@ -110,9 +110,7 @@ function add(a: number, b: number, c = 0) {
 :::caution
 - Default parameters must be the last parameters in the function.
 - Default parameters cannot be followed by required parameters.
-
----
-
+:::
 ## Composing Optional and Default Parameters
 
 We can in fact compose optional and default parameters together, but we must follow the rules of optional and default parameters.
