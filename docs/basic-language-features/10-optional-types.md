@@ -5,11 +5,16 @@ description: Optional Properties
 ---
 
 # Optional Properties
-Optional properties are properties that can be set to be `undefined` or completely omitted.  
+Optional properties are object properties that can be ommited. 
 They are declared using the `?` operator after the property name.  
-A property that is not optional is called a **_required_** property.  
-Note that optional properties automatically make the type of the property `undefined` as well.
 
+:::info
+A property that is not optional is called a **_required_** property.  
+:::
+
+Note that once a property is declared as optional, it's automatically considered to be of type `T | undefined` (union with `undefined`), where `T` is the type of the property.
+
+For example, the following interface declares the `age` property as optional, which means that it can be omitted, and now considered to be of type `number | undefined`:
 ```ts
 interface Person {
     name: string;
@@ -26,12 +31,13 @@ const person2: Person = { name: "Jack", isEmployee: true, age: undefined };
 const person3: Person = { name: "Jane", isEmployee: true, age: 42 };
 // This is OK because age is of type number and can be set to a number
 ```
-:::danger
 
-Optional properties act as if they were unions with `undefined`, but they are not the same because if a property is optional, it can be omitted completely, while a union with `undefined` cannot be omitted.
+:::caution
 
-For example these two interfaces seem to be the same, but creating an object of type `PersonType1` without the `age` property will not result in an error, while creating an object of type `PersonType2` without the `age` property will result in an error.
+Optional properties are by nature in union with `undefined`, but properties whose type is `T | undefined` are **not** implicitly optional.  
+The difference is that optional properties can be omitted, while properties of type `T | undefined` cannot be omitted and are considered **required**.
 
+For example these two interfaces seem to be the same, but they are not:
 ```ts
 interface PersonType1 {
     name: string;

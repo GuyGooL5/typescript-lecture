@@ -16,7 +16,7 @@ sidebar_position: 100
    4. Interface Types ✔
    5. Classes ✔
    6. `readonly` keyword ✔
-   7. Union Types
+   7. Union Types ✔
    8. Optional types `?` ✔
    9. Infered Types ✔
    10. Literal Types ✔
