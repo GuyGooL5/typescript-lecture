@@ -1,25 +1,30 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require("prism-react-renderer/themes/github");
+const lightCodeTheme = require("prism-react-renderer/themes/oceanicNext");
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 const organizationName = "GuyGooL5";
 const projectName = "typescript-lecture";
 
+const githubUrl = `https://github.com/${organizationName}/${projectName}`;
+const githubPagesUrl = `https://${organizationName}.github.io`;
+
+const appTitle = "The Sane TypeScript Book";
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "TypeScript from Zero to Less Confused",
+  title: appTitle,
   tagline: "Better understand TypeScript",
   favicon: "img/favicon.ico",
 
   // Set the production url of your site here
-  url: `https://${organizationName}.github.io`,
+  url: githubPagesUrl,
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
+  // baseUrl: `/${projectName}/`,
   baseUrl: `/${projectName}/`,
-  organizationName,
-  projectName,
+  trailingSlash: false,
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
 
@@ -35,14 +40,27 @@ const config = {
       ({
         blog: false,
         docs: {
-          routeBasePath: "/",
+          routeBasePath: "docs",
           sidebarPath: require.resolve("./sidebars.js"),
           editUrl: `https://github.com/${organizationName}/${projectName}/tree/master/`,
+          lastVersion: "current",
+          onlyIncludeVersions: ["current"],
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
       }),
+    ],
+  ],
+  plugins: [
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "docs-tsdr",
+        path: "docs-tsdr",
+        routeBasePath: "docs-tsdr",
+        sidebarPath: require.resolve("./sidebars.js"),
+      },
     ],
   ],
   noIndex: true,
@@ -52,7 +70,7 @@ const config = {
       // Replace with your project's social card
       image: "img/docusaurus-social-card.jpg",
       navbar: {
-        title: "TypeScript from Zero to Less Confused",
+        title: appTitle,
         logo: {
           alt: "My Site Logo",
           src: "img/logo.svg",
@@ -62,10 +80,16 @@ const config = {
             type: "docSidebar",
             sidebarId: "tutorialSidebar",
             position: "left",
-            label: "Presentations",
+            label: "In Depth",
           },
           {
-            href: "https://github.com/guygool5/typescript-from-zero-to-less-confused",
+            to: "docs-tsdr",
+            label: "TS;DR",
+            position: "left",
+            activeBaseRegex: `/docs-tsdr/`,
+          },
+          {
+            href: githubUrl,
             label: "GitHub",
             position: "right",
           },
