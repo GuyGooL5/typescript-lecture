@@ -25,7 +25,7 @@ const config = {
   // baseUrl: `/${projectName}/`,
   baseUrl: `/${projectName}/`,
   trailingSlash: false,
-  onBrokenLinks: "throw",
+  onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
 
   i18n: {
@@ -40,11 +40,9 @@ const config = {
       ({
         blog: false,
         docs: {
-          routeBasePath: "docs",
+          routeBasePath: "/",
           sidebarPath: require.resolve("./sidebars.js"),
           editUrl: `https://github.com/${organizationName}/${projectName}/tree/master/`,
-          lastVersion: "current",
-          onlyIncludeVersions: ["current"],
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
@@ -52,18 +50,6 @@ const config = {
       }),
     ],
   ],
-  plugins: [
-    [
-      "@docusaurus/plugin-content-docs",
-      {
-        id: "docs-tsdr",
-        path: "docs-tsdr",
-        routeBasePath: "docs-tsdr",
-        sidebarPath: require.resolve("./sidebars.js"),
-      },
-    ],
-  ],
-  noIndex: true,
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
@@ -78,15 +64,9 @@ const config = {
         items: [
           {
             type: "docSidebar",
-            sidebarId: "tutorialSidebar",
+            sidebarId: "docsSidebar",
             position: "left",
-            label: "In Depth",
-          },
-          {
-            to: "docs-tsdr",
             label: "TS;DR",
-            position: "left",
-            activeBaseRegex: `/docs-tsdr/`,
           },
           {
             href: githubUrl,

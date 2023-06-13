@@ -3,57 +3,58 @@ slug: /
 sidebar_position: 1
 ---
 
-# Introduction
+# TypeScript; Didn't Read - TS;DR
 
-## What TypeScript is
+## Audience
 
-TypeScript is a superset of JavaScript that adds optional static typing and other features to the language.  
-It is designed to make large-scale JavaScript applications more manageable and easier to maintain.
+This book is for the impatient developer who wants to learn TypeScript as fast as possible, it will be heavily example based and will not cover every aspect or reasonings in depth.
 
-### What Does "Superset of JavaScript" Mean?
-Well it means that TypeScript is a language that is built on top of JavaScript. It has all the features of JavaScript and more.  
-Note that this is not the case the other way around.
+Let's start!
 
-For example, this is a valid JavaScript and TypeScript code:
+## What's TypeScript?
+
+TypeScript is a programming language and a [superset](https://en.wikipedia.org/wiki/Subset#:~:text=superset) of JavaScript that adds typing and other features to the language.  
+
+TypeScript can do everything JavaScript can (and more), but not the other way around.
+
+Here's a reference for a valid TypeScript and JavaScript code:
 ```ts
 function add(a, b) {
     return a + b;
 }
 ```
-But this is not valid JavaScript code:
+But this code is only valid TypeScript code:
 ```ts
 function add(a: number, b: number) {
     return a + b;
 }
 ```
-
-## Where Can I use TypeScript?
-TypeScript can be used in any environment where JavaScript is used, including web development, server-side development, and desktop and mobile applications.
 
 ### How Can I Run TypeScript Code?
-TypeScript code needs to be compiled to JavaScript before it can be run. This can be done using the TypeScript compiler `tsc`, which is a command-line tool that can be installed using npm. 
+The Browser and [Node.js](https://nodejs.org/en) can't run TypeScript code directly, therefore, TypeScript code must be compiled to JavaScript to be executed.
 
-#### But Wait! I heared there's a way to run TypeScript code without compiling it!
-That's true, although the most popular runtimes for JavaScript are still Node.js and the browser. There are several runtimes for TypeScript.
-1. TSNode - which is a Node.js runtime that compile TypeScript code on the fly.
-2. Deno - the successor of Node.js, which runs TypeScript code natively.
-3. Bun - another runtime just like Deno in early stages of development that runs TypeScript code natively.
+There are actually a few runtimes that can run TypeScript code directly like [ts-node](https://www.npmjs.com/package/ts-node), [Deno](https://deno.com/runtime), and [Bun](https://bun.sh/)
 
-## What TypeScript is Not
 
-### TypeScript is Not a New Language
-TypeScript is simply a tool that helps you write better JavaScript code.  
-It is not a new language, and it is not a replacement for JavaScript.  
-Because TypeScript just compiles to JavaScript, some "invalid" TypeScript code is actually valid JavaScript code.
 
-For example, this is invalid TypeScript code:
+## Core Concepts
+
+### Not a New Language
+TypeScript adds a solid type system to JavaScript, but it's not a new language.  
+Once the code is compiled to JavaScript, all types are stripped and the code is executed as regular JavaScript code.
+
+In other words, the type system is "just for looks" and is not enforced at runtime.
+
+In the following example, the type system will complain about the types, but the compiled JavaScript code will still work as expected:
 ```ts
 function add(a: number, b: number) {
     return a + b;
 }
-add("Hello", "World");
+add("Hello", "World"); 
+// Theoretically, this should not work because the arguments are not numbers.
+// But JavaScript doesn't care about types, so it will work.
 ```
-But it will compile to valid JavaScript code:
+Because once compiled, the code will look like this:
 ```js
 function add(a, b) {
     return a + b;
@@ -61,25 +62,21 @@ function add(a, b) {
 add("Hello", "World");
 ```
 
-## TypeScript is a Structural Type System
+### TypeScript is a Structural Type System
 
-### What is a Structural Type System?
-A structural type system is a type system based on the structure of a value.  
-Structural typing is a way of relating types based solely on their members.  
-This is in contrast to nominal typing. In a nominally typed language, types are compatible based on their declarations.
+Being a [Structural Type System](https://en.wikipedia.org/wiki/Structural_type_system) means that TypeScript cares about the structure of the types, not their names, like in a [Nominal Type System](https://en.wikipedia.org/wiki/Nominal_type_system).
 
-For example, in a nominal type system, the following two types are not compatible:
-```ts
-class Person {
-    name: string;
-}
-
-class Employee {
-    name: string;
-}
+For example, in C language, the following two types are not compatible even though they have the same structure:
+```c
+struct Person {
+    char* name;
+};
+struct Employee {
+    char* name;
+};
 ```
 
-But in TypeScript, they are compatible:
+But in TypeScript, they are compatible, and interchangeable:
 ```ts
 
 interface Person {
@@ -92,29 +89,32 @@ interface Employee {
 ```
 
 ### Does it Even Matter?
+Yes, this allows us to use types from external libraries or within our codebase without having to (re)declare them ourselves or even import them in most cases.
 
-This is important because it allows us to use types that were not declared in our code. For example, we can use types from external libraries without having to declare them ourselves.
-
-Let's say a function takes a parameter of type `Person`:
+In the following example, the `printPoint` function's only parameter is a `Point` type, but when we call it with an object that has the same structure as a `Point`, it will work, without having to import or declare the `Point` type.
 ```ts
+/* point.ts */
 
-interface Person { name: string; }
-
-function sayHello(person: Person) {
-    console.log(`Hello ${person.name}`);
-}
-```
-We can pass any arbitrary object to this function as long as it has a `name` property:
-```ts
-
-interface Person { name: string; }
-
-function sayHello(person: Person) {
-    console.log(`Hello ${person.name}`);
+interface Point{
+    x: number;
+    y: number;
 }
 
-sayHello({ name: "John" });
+export function printPoint(point: Point) {
+    console.log(`x: ${point.x}, y: ${point.y}`)
+}
+```
+```ts
+/* main.ts */
+
+import { printPoint } from "./point";
+
+const p1 = { x: 1, y: 2 };
+
+printPoint(p1); // This will work, even though p1 is not explicitly declared as a Point.
+
 ```
 
-This concept is referred to as "Duck Typing", which means that if it looks like a duck and quacks like a duck, it must be a duck.
-The TypeScript engine is ignorant of the fact that the object we passed to the function was not declared as a `Person`, it only cares about the structure of the object.
+## What's Next?
+
+In the following chapter we will dive into the basic language features of TypeScript.
