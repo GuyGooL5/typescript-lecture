@@ -5,56 +5,62 @@ description: The 'never' Type
 ---
 
 # The `never` Type
-
+## What is `never`?
 `never` is a special type that represents a value that will never occur.  
-What does that even mean?  
+Seems confusing, let's see.
 
-Well, let's take a look at the following examples:
+Take a look at the following examples:
 
 ```ts
-
 function crash(){
     throw new Error("Something went wrong!");
 }
-
 function stuck(){
     while(true);
 }
 ```
 
-The `crash` function will never return a value because it throws an error, and the `stuck` function will never return a value because it's stuck in an infinite loop.
+- The `crash` function will never return a value because it always throws an error. 
+- The `stuck` function will never return a value because it's an infinite loop.
 
 In both cases, the return type of the function is `never`.
 
 ```ts
-
 function crash(): never {
     throw new Error("Something went wrong!");
 }
-
 function stuck(): never {
     while(true);
 }
 ```
 
-The `never` type is useful when you want to make sure that a function never returns a value.
 
-For example, everything that happens after the `crash` function call is unreachable code, so the compiler will complain:
+## Why/When to use `never`?
 
+We don't really "use" `never`, but rather "know it's there".  
+I'll explain.
+
+When we write code, we expect it to be executed.  
+But when a function returns `never`, it means that everything after the function call is unreachable code.
+
+
+In the following example, the `doSomething` function will never execute the `console.log` statement because the `crash` function will throw an error and the program will crash.
 ```ts
-
 function crash(): never {
     throw new Error("Something went wrong!");
 }
-
 function doSomething() {
     crash();
     console.log("This will never happen");
 }
-
 doSomething();
 ```
-
-The IDE itself would grey out the unreachable code and complain:
+TypeScript's compiler is smart enough to detect unreachable code and will complain about it.  
+Also, the IDE will warn you about unreachable code.
 
 ![Unreachable code](/assets/16-fig_1.png)
+
+:::note 
+`never` is also widely used in advanced TypeScript features where we want to represent "impossible types".   
+More on that in the [Advanced Types](#todo) chapter.
+:::

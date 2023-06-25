@@ -10,11 +10,9 @@ description: The 'void' Type
 It is used when a function doesn't return anything.  
 
 ```ts
-
 function greet(name: string): void {
     console.log(`Hello, ${name}!`);
 }
-
 greet("John"); // This is okay and the return value is ignored
 ```
 
@@ -34,7 +32,23 @@ Also avoid assigning function return values to variables of type `void`.
 function greet(name: string): void {
     console.log(`Hello, ${name}!`);
 }
-
 const result = greet("John"); // This is useless and should be avoided
 ```
 :::
+
+## Void in Asynchronous Functions
+
+In asynchronous functions, or functions that return a `Promise` without a value, `Promise<void>` is used instead of `void`.
+
+```ts
+function greet(name: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+        console.log(`Hello, ${name}!`);
+        resolve();
+    });
+}
+
+async function main() { // Inferred return type: Promise<void>
+    await greet("John");
+}
+```
