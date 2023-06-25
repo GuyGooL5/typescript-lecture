@@ -71,9 +71,7 @@ class RecursionEndError extends Error {
 }
 
 function recurse(n: number) {
-    if (n === 0) 
-        throw new RecursionEndError();
-
+    if (n === 0) throw new RecursionEndError();
     recurse(n - 1);
 }
 ```
@@ -132,4 +130,4 @@ try {
 When we use `instanceof`, TypeScript knows that `error` is of type `RecursionEndError` and we can safely access the `message` property. The IDE will also suggest the `message` property when we type `error.`.  
 Note that it's exclusive to the same clause, in the `else` clause, `error` is still of type `unknown`.
 
-![TypeScript's type guard](/assets/17_fig-1.png)
+![instanceof type guard example](/assets/17_fig-1.png)
