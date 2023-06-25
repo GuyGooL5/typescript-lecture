@@ -4,7 +4,7 @@ sidebar_label: Primitives
 description: Primitive Types
 ---
 
-# Explicit Types, Primitives and Type Inferencing
+# Explicit Types, Primitives and Type Inferring
 
 ## Explicit Types
 We can explicitly declare the type of a variable using the `:` operator.
@@ -20,7 +20,7 @@ myNumber = "Hello, world!"; // Error: Type 'string' is not assignable to type 'n
 
 
 ## Primitives
-TypeScript has the following basic evereyday primitive types:  
+TypeScript has the following basic everyday primitive types:  
 `boolean`, `number`, `string`, `null`, `undefined`, `bigint`, `symbol`
 
 ```ts
@@ -33,8 +33,8 @@ const myBigInt: bigint = 9007199254740991n;
 const mySymbol: symbol = Symbol("mySymbol");
 ```
 
-## Type Inferencing
-TypeScript supports inferencing, which means that the type of a variable can be determined by the value assigned to it.
+## Type Inferring
+TypeScript supports inferring, which means that the type of a variable can be determined by the value assigned to it.
 
 ```ts
 let age = 42; // '42' is of type number, so age is now of type number
